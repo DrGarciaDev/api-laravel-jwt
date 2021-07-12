@@ -63,6 +63,10 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
 
-        'jwt.verify' => \App\Http\Middleware\JwtMiddleware::class,
+        // MIDDLEWARE PERSONALIZADO PARA JWT
+        'jwt.personalizado' => \App\Http\Middleware\JwtMiddleware::class,
+        // MIDDLEWARES DE LA LIBRERÍA jwt-auth
+        'jwt.auth' => \Tymon\JWTAuth\Middleware\GetUserFromToken::class,
+        'jwt.refresh' => \Tymon\JWTAuth\Middleware\RefreshToken::class
     ];
 }

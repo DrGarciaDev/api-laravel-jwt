@@ -18,11 +18,12 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::post('register', 'App\Http\Controllers\UserController@register');
-Route::post('login',    'App\Http\Controllers\UserController@authenticate');
 
-Route::group(['middleware' => ['jwt.verify']], function() {
+Route::group(['prefix' => 'auth'], function() {
+    Route::post('register', 'App\Http\Controllers\UserController@register');
+    Route::post('login',    'App\Http\Controllers\UserController@login');
+    Route::get('logout',    'App\Http\Controllers\UserController@logout');
 
-    Route::post('user','App\Http\Controllers\UserController@getAuthenticatedUser');
-
+    Route::post('user',     'App\Http\Controllers\UserController@getAuthenticatedUser');
+    Route::post('refresh',  'App\Http\Controllers\UserController@refreshToken');
 });
